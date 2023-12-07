@@ -43,7 +43,7 @@ create:(req, res) => {
 detail: (req, res) => {
     const {id} = req.params;
     const product = products.find(producto => producto.id == id);
-    res.render('products/detail', { title: product.nombre, product });
+    res.render('products/detailProducts', { title: "productDetail",product  });
 },
 
 formUpdate: (req, res) => {

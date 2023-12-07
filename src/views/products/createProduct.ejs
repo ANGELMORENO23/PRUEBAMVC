@@ -1,7 +1,7 @@
 <%- include("../partials/head.ejs") %>
   <body class="home__body">
     <%- include("../partials/header.ejs") %>
-    <main>
+    <main class="createpro">
         <form action="/products/create" method="post">
             <div>
                 <label for="nombre" id="nombre"> Ingrese el nombre del producto</label>
@@ -20,7 +20,7 @@
                 <label for="precio" >precio</label>
                 <input type="text" name="price" >
             </div>
-            <div>
+            <div class="botoncreate">
                 <button type="reset">Borrar</button>
                 <button type="submit">Crear</button>
             </div>
