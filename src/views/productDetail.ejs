@@ -8,7 +8,7 @@
          
          <section class="Detail__main__principal">
              <article class="Detail__main__articulos">
-                <img src="/img/1-thinkpad Yoga X1.png" alt="Aquí va la foto4 1-thinkpad Yoga ">
+                <img src="/img/<%= detalle.image %>" alt="Aquí va la foto4 1-thinkpad Yoga ">
                 
                 <div>
                     <h5>Precio especial Notebook</h5>
@@ -24,24 +24,11 @@
              </article>
              <article class="Detail__main__caracteristicas">
                 <ul class="caracteristicas__titulo">
-                    
-                    <h2>ThinkPad X1 Yoga 6ta Gen(14"Intel)</h2>
-                    <li>Laptop 2 en 1 potente y liviana con Intel Eva opcional</li>
-                    <li>Inicio de sección con un solo toque</li>
-                    <li>Lápiz recargable integrado para dibujar o tomar notas</li>
-                </ul>
-                <ul class="caracteristicas__detalles">
-                    
-                    <h2>Ver los detalles del Producto</h2>
-                    <li>Marca: Lenovo</li>
-                    <li>Nombre del modelo: Lenovo Thinkpad</li>
-                    <li>Tamaño de pantalla: 14 Pulgadas</li>
-                    <li>Tamaño de disco duro: 512GB SSD</li>
-                    <li>CPU: Core i7 </li>
-                    <li>Memoria Ram Instalada:16 GB</li>
-                    <li>Sistema Operativo: Windows 10 Pro</li>
-                    <li>Tarjeta gráfica: Integrado</li>
-                    <li>Velocidad de la CPU: 3 GHz</li>
+                    <% for(propiedad in products.description){ %>
+                        <p>
+                            <%= propiedad %>: <%= product.description[propiedad] %>
+                        </p>
+                    <% } %>
                 </ul>
              </article>
          </section>

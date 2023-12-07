@@ -13,7 +13,7 @@
     <section class="main__register__form">
     
     
-        <form class="register__form_general" action="/guardar-info" method="POST">
+        <form  action="/users/register" method="post" class="register__form_general">
             
         <div class="register">
            <div class="register__form_general-label">
@@ -26,7 +26,7 @@
             </div>
     
             <div class="register__form_general-input">
-                <input type="text" name="" id="placeholder" placeholder="Escribe aqui tu nombre">
+                <input type="text" name="Nombre de usuario" id="placeholder" placeholder="Escribe aqui tu nombre">
             </div> 
         </div>  
     
@@ -41,7 +41,7 @@
             </div>
     
             <div class="register__form_general-input">    
-                <input type="text" name="" id="placeholder" placeholder="Escribí aquí tu correo">
+                <input type="email" name="correo" id="placeholder" placeholder="Escribí aquí tu correo">
     
             </div>
         </div>
@@ -56,7 +56,7 @@
             </div>  
                
             <div class="register__form_general-input">
-                <input type="text" name="" id="placeholder" placeholder="Escribí aquí tu contraseña">
+                <input type="password" name="contraseña" id="placeholder" placeholder="Escribí aquí tu contraseña">
             </div>
          
         </div>
@@ -71,11 +71,27 @@
             </div> 
             
             <div class="register__form_general-input">
-                <input type="text" name="" id="placeholder" placeholder="Repetir contraseña">
+                <input type="password" name="contraseña" id="placeholder" placeholder="Repetir contraseña">
             </div>
         
         </div>
+        <div class="register__buttom">
+            
+             <button type="submit">Registrarme</button>
         
+            
+            <h6>Registrarme con</h6>
+            <nav>
+             <ul class="redessocialesregsiter">
+                 <a href="https://google.com"><i class="fa-brands fa-google"></i></i></a>
+                 <a href="https://twitter.com"><i class="fa-brands fa-twitter"></i></i></a>
+                 <a href="https://facebook.com"><i class="fa-brands fa-facebook"></i></i></a>
+             </ul>
+            </nav>
+            <h5>¿ya tiene una cuenta? inicie sesión</h5>
+ 
+ 
+         </div>
     
         </form>
         
@@ -89,23 +105,7 @@
             </div>   
            
            
-            <div class="register__buttom">
-               <form action="" method="post">
-                <button type="submit">Registrarme</button>
-            </form>
-               
-               <h6>Registrarme con</h6>
-               <nav>
-                <ul class="redessocialesregsiter">
-                    <a href="https://google.com"><i class="fa-brands fa-google"></i></i></a>
-                    <a href="https://twitter.com"><i class="fa-brands fa-twitter"></i></i></a>
-                    <a href="https://facebook.com"><i class="fa-brands fa-facebook"></i></i></a>
-                </ul>
-               </nav>
-               <h5>¿ya tiene una cuenta? inicie sesión</h5>
-    
-    
-            </div>
+            
     
 
     

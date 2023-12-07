@@ -1,93 +1,69 @@
-const productsdetalle = [
-    {
-      id: 1,
-      titulo: "ThinkPad X1 Yoga 6ta Gen(14Intel)",
-      opcional: "Laptop 2 en 1 potente y liviana con Intel Eva opcional",
-      arranque: "Inicio de sección con un solo toque",
-      lapiz: "Lápiz recargable integrado para dibujar o tomar notas",
-      detalles: "Ver los detalles del Producto",
-      marca:"Marca: Lenovo",
-      modelo: "Nombre del modelo: Lenovo Thinkpad",
-      pantalla: "Tamaño de pantalla: 14 Pulgadas",
-      disco : "Tamaño de disco duro: 512GB SSD",
-      cpu:" CPU: Core i7",
-      memoria: "Memoria Ram Instalada:16 GB",
-      sistema: "Sistema Operativo: Windows 10 Pro",
-      grafica: "Tarjeta gráfica: Integrado",
-      velocidad : "Velocidad de la CPU: 3 GHz",
-      image: "1-asus zenbook pro duo.png",
-      price: 2.222222222222222222,
-    },
-    {
-        id: 2,
-        titulo: "ThinkPad X1 Yoga 6ta Gen(14Intel)",
-        opcional: "Laptop 2 en 1 potente y liviana con Intel Eva opcional",
-        arranque: "Inicio de sección con un solo toque",
-        lapiz: "Lápiz recargable integrado para dibujar o tomar notas",
-        detalles: "Ver los detalles del Producto",
-        marca:"Marca: Lenovo",
-        modelo: "Nombre del modelo: Lenovo Thinkpad",
-        pantalla: "Tamaño de pantalla: 14 Pulgadas",
-        disco : "Tamaño de disco duro: 512GB SSD",
-        cpu:" CPU: Core i7",
-        memoria: "Memoria Ram Instalada:16 GB",
-        sistema: "Sistema Operativo: Windows 10 Pro",
-        grafica: "Tarjeta gráfica: Integrado",
-        velocidad : "Velocidad de la CPU: 3 GHz",
-        image: "1-asus zenbook pro duo.png",
-        price: 4444444444444,
-      },
-      {
-        id: 3,
-        titulo: "ThinkPad X1 Yoga 6ta Gen(14Intel)",
-        opcional: "Laptop 2 en 1 potente y liviana con Intel Eva opcional",
-        arranque: "Inicio de sección con un solo toque",
-        lapiz: "Lápiz recargable integrado para dibujar o tomar notas",
-        detalles: "Ver los detalles del Producto",
-        marca:"Marca: Lenovo",
-        modelo: "Nombre del modelo: Lenovo Thinkpad",
-        pantalla: "Tamaño de pantalla: 14 Pulgadas",
-        disco : "Tamaño de disco duro: 512GB SSD",
-        cpu:" CPU: Core i7",
-        memoria: "Memoria Ram Instalada:16 GB",
-        sistema: "Sistema Operativo: Windows 10 Pro",
-        grafica: "Tarjeta gráfica: Integrado",
-        velocidad : "Velocidad de la CPU: 3 GHz",
-        image: "1-asus zenbook pro duo.png",
-        price: 5555555555555,
-      },
-      {
-        id: 4,
-        titulo: "ThinkPad X1 Yoga 6ta Gen(14Intel)",
-        opcional: "Laptop 2 en 1 potente y liviana con Intel Eva opcional",
-        arranque: "Inicio de sección con un solo toque",
-        lapiz: "Lápiz recargable integrado para dibujar o tomar notas",
-        detalles: "Ver los detalles del Producto",
-        marca:"Marca: Lenovo",
-        modelo: "Nombre del modelo: Lenovo Thinkpad",
-        pantalla: "Tamaño de pantalla: 14 Pulgadas",
-        disco : "Tamaño de disco duro: 512GB SSD",
-        cpu:" CPU: Core i7",
-        memoria: "Memoria Ram Instalada:16 GB",
-        sistema: "Sistema Operativo: Windows 10 Pro",
-        grafica: "Tarjeta gráfica: Integrado",
-        velocidad : "Velocidad de la CPU: 3 GHz",
-        image: "1-asus zenbook pro duo.png",
-        price: 666666666666666,
-      },
-  ];
+const fs = require("fs");
+const path = require("path");
+const json = fs.readFileSync(path.join(__dirname,"../data/products.json"),"utf-8")
+const products = JSON.parse(json);
+
+
 const detailcontrollers = {
     productDetail: function (req, res) {
         const id = req.params.id;
-        const detalle = productsdetalle.find(detalle => detalle.id == id)
-        res.render("productDetail", { title: "productDetail", detalle });
+        const detalle = products.find(detalle => detalle.id == id)
+        res.render("productDetail", { title: "productDetail", detalle, products });
     },
     productCart: function (req, res) {
         res.render("productCart", { title: "productCart" });
     },
-    productedit: function (req, res) {
-        res.render("productedit", { title: "productedit" });
-    }
+    productcreate: function (req, res) {
+        res.render("productcreate", { title: "productcreate" });
+    },
+    dashboard:(req, res) => {
+      const propiedades = ["id","nombre","imagen","sticker"];
+      
+      /*for ( prop in products[0]) {
+          propiedades.push(prop)
+      }*/
+      
+      console.log(propiedades);
+      res.render('products/dashboard', { title: "Dashboard", products, propiedades });
+  },
+  formCreate:(req, res) => {
+    res.render('products/createProduct', { title: "Create Product" });
+},
+
+create:(req, res) => {
+    const producto = req.body;
+    producto.id = products[products.length-1].id + 1;
+    products.push(producto);
+    console.log(products);
+    const json = JSON.stringify(products);
+    fs.writeFileSync(path.join(__dirname,"../data/products.json"),json,'utf-8')
+    res.redirect("/products/dashboard");
+},
+
+detail: (req, res) => {
+    const {id} = req.params;
+    const product = products.find(producto => producto.id == id);
+    res.render('products/detail', { title: product.nombre, product });
+},
+
+formUpdate: (req, res) => {
+    const {id} = req.params;
+    const product = products.find(producto => producto.id == id);
+    res.render('products/createProduct', { title: product.nombre, product });
+},
+update: (req, res) => {
+    const {id} = req.params;
+    const product = products.find(producto => producto.id == id);
+    res.redirect("/products/dashboard");
+},
+productDelete: (req, res) => {
+    const {id} = req.params;
+    const product = products.find(producto => producto.id == id);
+    res.redirect("/products/dashboard");
+},
+example:(req, res) => {
+    res.render('products/example', { title: 'kitchennig', product:example });
+}
 };
 
 module.exports = detailcontrollers;
